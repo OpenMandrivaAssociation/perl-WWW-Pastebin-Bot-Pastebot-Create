@@ -1,18 +1,16 @@
+%define upstream_name    WWW-Pastebin-Bot-Pastebot-Create
+%define upstream_version 0.001
 
-%define realname   WWW-Pastebin-Bot-Pastebot-Create
-%define version    0.001
-%define release    %mkrel 3
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 4
 
-Name:       perl-%{realname}
-Version:    %{version}
-Release:    %{release}
-License:    GPL or Artistic
-Group:      Development/Perl
 Summary:    create pastes on sites powered by Bot::Pastebot
-Source:     http://www.cpan.org/modules/by-module/WWW/%{realname}-%{version}.tar.gz
-Url:        http://search.cpan.org/dist/%{realname}
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: perl-devel
+License:    GPL+ or Artistic
+Group:      Development/Perl
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/WWW/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires: perl(Carp)
 BuildRequires: perl(Class::Data::Accessor)
 BuildRequires: perl(Devel::TakeHashArgs)
@@ -22,25 +20,21 @@ BuildRequires: perl(URI)
 BuildRequires: perl(Module::Build::Compat)
 
 BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
-
 The module provides interface to paste into pastebin sites powered by the
 Bot::Pastebot manpage
 
-
-
-
-
 %prep
-%setup -q -n %{realname}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
-make test
+%make test
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -54,6 +48,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc README META.yml Changes
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
-
-
