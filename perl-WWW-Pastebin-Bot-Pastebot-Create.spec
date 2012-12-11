@@ -1,26 +1,26 @@
 %define upstream_name    WWW-Pastebin-Bot-Pastebot-Create
 %define upstream_version 0.001
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 5
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	6
 
-Summary:    create pastes on sites powered by Bot::Pastebot
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/WWW/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Create pastes on sites powered by Bot::Pastebot
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/WWW/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Carp)
-BuildRequires: perl(Class::Data::Accessor)
-BuildRequires: perl(Devel::TakeHashArgs)
-BuildRequires: perl(LWP::UserAgent)
-BuildRequires: perl(Test::More)
-BuildRequires: perl(URI)
-BuildRequires: perl(Module::Build::Compat)
+BuildRequires:	perl-devel
+BuildRequires:	perl(Carp)
+BuildRequires:	perl(Class::Data::Accessor)
+BuildRequires:	perl(Devel::TakeHashArgs)
+BuildRequires:	perl(LWP::UserAgent)
+BuildRequires:	perl(Test::More)
+BuildRequires:	perl(URI)
+BuildRequires:	perl(Module::Build::Compat)
 
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildArch:	noarch
 
 %description
 The module provides interface to paste into pastebin sites powered by the
@@ -30,21 +30,39 @@ Bot::Pastebot manpage
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root)
 %doc README META.yml Changes
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Mon Apr 18 2011 Funda Wang <fwang@mandriva.org> 0.1.0-5mdv2011.0
++ Revision: 655241
+- rebuild for updated spec-helper
+
+* Sat Feb 13 2010 Jérôme Quelin <jquelin@mandriva.org> 0.1.0-4mdv2011.0
++ Revision: 505280
+- rebuild using %%perl_convert_version
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 0.001-3mdv2010.0
++ Revision: 430658
+- rebuild
+
+* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 0.001-2mdv2009.0
++ Revision: 268877
+- rebuild early 2009.0 package (before pixel changes)
+
+* Sat Apr 12 2008 Olivier Thauvin <nanardon@mandriva.org> 0.001-1mdv2009.0
++ Revision: 192625
+- import perl-WWW-Pastebin-Bot-Pastebot-Create
+
+
