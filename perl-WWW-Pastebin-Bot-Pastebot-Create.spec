@@ -1,15 +1,15 @@
 %define upstream_name    WWW-Pastebin-Bot-Pastebot-Create
-%define upstream_version 0.001
+%define upstream_version 0.002
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	6
+Release:	1
 
 Summary:	Create pastes on sites powered by Bot::Pastebot
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{upstream_name}
-Source0:	http://www.cpan.org/modules/by-module/WWW/%{upstream_name}-%{upstream_version}.tar.gz
+Source0:	http://www.cpan.org/modules/by-module/WWW/WWW-Pastebin-Bot-Pastebot-Create-%{upstream_version}.tar.gz
 
 BuildRequires:	perl-devel
 BuildRequires:	perl(Carp)
@@ -64,5 +64,6 @@ perl Makefile.PL INSTALLDIRS=vendor
 * Sat Apr 12 2008 Olivier Thauvin <nanardon@mandriva.org> 0.001-1mdv2009.0
 + Revision: 192625
 - import perl-WWW-Pastebin-Bot-Pastebot-Create
+
 
 
